@@ -5,9 +5,9 @@ const verifyToken = require('../middlewares/authorization');
 const router = Router()
 
 router.post(('/'), userController.createUser)
-router.get(('/'), verifyToken, userController.getAllUsers)
-router.get(('/:id'), verifyToken, userController.getUserById)
-router.put(('/:id'), verifyToken, userController.updateUser)
-router.delete(('/:id'), verifyToken, userController.deleteUser)
+router.get(('/'), userController.getAllUsers)
+router.get(('/:id'), userController.getUserById)
+router.put(('/:id'), userController.updateUser)
+router.delete(('/:id'), userController.deleteUser)
 
 module.exports = router
