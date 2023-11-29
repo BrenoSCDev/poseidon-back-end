@@ -18,7 +18,7 @@ const GoodsSchema = new mongoose.Schema({
 
 
 const GoodOccurrenceSchema = new mongoose.Schema({
-  user: { type: Number, default: undefined },
+  user: { type: String, default: undefined },
   support: { type: Number, required: true },
   org: { type: Number, required: true },
   dayWeek: {

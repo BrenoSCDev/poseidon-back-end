@@ -1,6 +1,6 @@
 const Good = require('../models/goods');
 const verifyToken = require('../middlewares/authorization')
-
+const User = require('../models/user')
 const createGood = async (req, res) => {
   try {
     const newGood = await Good.create(req.body);
@@ -13,8 +13,12 @@ const createGood = async (req, res) => {
 
 const getAllGoods = async (req, res) => {
   try {
-    const Goods = await Good.find();
-    res.status(200).json(Goods);
+    const Goods = await Good.find()
+    const user = await User.findById(req.body.user);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+    res.status(200).json({Goods, user});
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -64,11 +68,6 @@ const deleteGood = async (req, res) => {
 
 const updateOccurrenceStatus = async (req, res) => {
     try {
-      const { status } = req.body;
-      if (!status || status !== 'Finalizado') {
-        return res.status(400).json({ message: 'Status inválido' });
-      }
-  
       const updatedGood = await Good.findByIdAndUpdate(
         req.params.id,
         { status: 'Finalizado' },

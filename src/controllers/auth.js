@@ -13,10 +13,10 @@ const login = async (req, res) => {
       return res.status(404).json({ message: 'Usuário não encontrado' });
     }
 
+    const passwordIsValid = bcrypt.compareSync(password, user.password);
 
-    if (password !== user.password) {
-      console.log('Invalid password');
-      return res.status(401).json({ message: 'Invalid credentials' });
+    if(!passwordIsValid) {
+        return res.status(404).send({ message: "Usuário ou senha inválidos." });
     }
     
     const token = generateToken(user._id);

@@ -4,7 +4,7 @@ const verifyToken = require('../middlewares/authorization')
 
 const router = Router()
 
-router.use(verifyToken)
+// router.use(verifyToken)
 
 router.post(('/'), bodyController.createBodyOccurrence)
 router.get(('/'), bodyController.getAllBodyOccurrences)
